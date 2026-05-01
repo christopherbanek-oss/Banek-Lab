@@ -2,9 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Banek Lab — Autonomic Neuromodulation in Cardiovascular &amp; Renal Disease</title>
-    <meta name="description" content="The Banek Lab at the University of Minnesota investigates how peripheral nerves control cardiovascular and renal function in health and disease — focused on hypertension and polycystic kidney disease." />
+    <meta name="description" content="The Banek Lab at the University of Minnesota investigates how sensory nerves shape physiology and disease — focused on hypertension and polycystic kidney disease." />
+    <meta name="theme-color" content="#050507" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
@@ -20,7 +21,7 @@
             <path d="M 1 16 Q 5 16 6 12 Q 7 8 9 16 Q 11 24 13 16 L 19 16 Q 21 8 23 16 Q 25 24 26 20 Q 27 16 31 16" />
           </svg>
           <span class="name">
-            Banek Lab
+            <span class="primary">Banek Lab</span>
             <span class="sub">UMN Medical School</span>
           </span>
         </a>
@@ -29,6 +30,7 @@
             <li><a href="#focus" class="active">Lab</a></li>
             <li><a href="#research">Research</a></li>
             <li><a href="#team">Team</a></li>
+            <li><a href="#collaborate">Collaborate</a></li>
             <li><a href="publications.html">Publications</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
@@ -42,6 +44,7 @@
           <li><a href="#focus">Lab</a></li>
           <li><a href="#research">Research</a></li>
           <li><a href="#team">Team</a></li>
+          <li><a href="#collaborate">Collaborate</a></li>
           <li><a href="publications.html">Publications</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -53,7 +56,7 @@
       <section class="hero">
         <div class="container">
           <div class="hero-meta">
-            <span><span class="ping" aria-hidden="true"></span> Live · Established 2023</span>
+            <span><span class="ping" aria-hidden="true"></span> Live · Established 2019</span>
             <span class="dash" aria-hidden="true"></span>
             <span>Minneapolis, MN · 44.97° N</span>
           </div>
@@ -65,8 +68,8 @@
 
           <div class="hero-grid">
             <p class="hero-tagline">
-              How peripheral nerves shape the heart and kidney —
-              <span class="pulse">in health,</span> and in disease.
+              How sensory nerves shape our
+              <span class="pulse">physiology</span> — and disease.
             </p>
 
             <div class="hero-pi">
@@ -78,11 +81,12 @@
           </div>
         </div>
 
-        <!-- Decorative waveform — hints at neural recordings -->
+        <!-- Sympathetic nerve burst recording — generated procedurally below -->
         <div class="waveform" aria-hidden="true">
-          <svg viewBox="0 0 1400 90" preserveAspectRatio="none">
-            <path class="gold" d="M0,45 L200,45 L210,30 L220,60 L230,40 L260,40 L270,20 L280,70 L290,40 L500,40 L510,25 L520,55 L530,42 L800,42 L810,28 L820,58 L830,40 L1100,40 L1110,18 L1120,65 L1130,42 L1400,42" />
-            <path d="M0,45 L160,45 L168,40 L172,52 L176,38 L180,55 L184,32 L188,60 L192,28 L196,52 L200,38 L204,48 L240,48 L250,30 L255,68 L260,15 L265,72 L270,28 L275,55 L280,42 L460,42 L468,38 L472,50 L476,35 L480,58 L484,28 L488,62 L492,30 L496,52 L500,40 L730,40 L738,35 L742,50 L746,32 L750,60 L754,25 L758,65 L762,30 L766,52 L770,42 L1050,42 L1058,38 L1062,52 L1066,30 L1070,62 L1074,22 L1078,68 L1082,28 L1086,55 L1090,40 L1400,40" />
+          <svg id="snaWave" viewBox="0 0 1400 110" preserveAspectRatio="none">
+            <line class="zero" x1="0" y1="80" x2="1400" y2="80" />
+            <path class="baseline" id="snaBaseline" />
+            <path class="bursts" id="snaBursts" />
           </svg>
         </div>
       </section>
@@ -151,7 +155,7 @@
             <div class="tile sm" data-label="Conference">
               <span class="corner">/ 04</span>
             </div>
-            <div class="tile sm" data-label="Teaching">
+            <div class="tile sm" data-label="Lab Alumni">
               <span class="corner">/ 05</span>
             </div>
             <div class="tile sm" data-label="Outreach">
@@ -293,13 +297,88 @@
         </div>
       </section>
 
+      <!-- ======= COLLABORATE ======= -->
+      <section id="collaborate">
+        <div class="container">
+          <div class="section-head">
+            <h2>Techniques we <em>share.</em></h2>
+            <div class="meta">
+              <span class="eyebrow"><span class="num">05</span> Collaborate</span>
+              <p style="color: var(--bone-2); font-size: 1.02rem; line-height: 1.7;">
+                Our lab maintains specialized techniques and animal models that are non-trivial to set up elsewhere. We're glad to bring collaborators in. Reach out and let's talk about what's possible together.
+              </p>
+            </div>
+          </div>
+
+          <div class="collab-grid">
+            <article class="skill">
+              <span class="skill-num">01 · In vivo</span>
+              <h3 class="skill-name">Chronic blood-pressure telemetry.</h3>
+              <p class="skill-desc">
+                Long-term, free-moving cardiovascular monitoring in rodent models of hypertension and renal disease. Continuous mean arterial pressure, heart rate, and activity over weeks-to-months.
+              </p>
+            </article>
+
+            <article class="skill">
+              <span class="skill-num">02 · Electrophysiology</span>
+              <h3 class="skill-name">Multi-unit renal nerve recording.</h3>
+              <p class="skill-desc">
+                Acute in vivo recordings of efferent and afferent renal sympathetic nerve activity, with simultaneous hemodynamic monitoring and pharmacological intervention.
+              </p>
+            </article>
+
+            <article class="skill">
+              <span class="skill-num">03 · Cellular</span>
+              <h3 class="skill-name">Whole-cell patch clamp.</h3>
+              <p class="skill-desc">
+                Isolation and electrophysiological characterization of dorsal-root and nodose sensory neurons, including responses to inflammatory mediators and other non-peptide signals.
+              </p>
+            </article>
+
+            <article class="skill">
+              <span class="skill-num">04 · Surgical</span>
+              <h3 class="skill-name">Targeted renal denervation.</h3>
+              <p class="skill-desc">
+                Selective afferent and total renal nerve ablation in rodent models, performed before or after disease onset, with validated histological and functional confirmation.
+              </p>
+            </article>
+
+            <article class="skill">
+              <span class="skill-num">05 · Models</span>
+              <h3 class="skill-name">PKD &amp; hypertension models.</h3>
+              <p class="skill-desc">
+                Established colonies and protocols for autosomal dominant (ADPKD) and recessive (ARPKD) polycystic kidney disease, alongside experimental hypertension models.
+              </p>
+            </article>
+
+            <article class="skill">
+              <span class="skill-num">06 · Molecular</span>
+              <h3 class="skill-name">Cytokine signaling assays.</h3>
+              <p class="skill-desc">
+                Tissue and circulating profiling of inflammatory mediators with paired neural-activity readouts — bridging molecular changes to physiologic consequence.
+              </p>
+            </article>
+          </div>
+
+          <div class="collab-cta">
+            <p class="cta-text">
+              Have a question, dataset, or model that might fit one of these? Let's talk.
+            </p>
+            <a href="mailto:cbanek@umn.edu?subject=Collaboration%20inquiry" class="cta-btn">
+              <span>Email Dr. Banek</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       <!-- ======= CONTACT ======= -->
       <section id="contact">
         <div class="container">
           <div class="section-head">
             <h2>Get in <em>touch.</em></h2>
             <div class="meta">
-              <span class="eyebrow"><span class="num">05</span> Contact</span>
+              <span class="eyebrow"><span class="num">06</span> Contact</span>
               <p style="color: var(--bone-2); font-size: 1.02rem; line-height: 1.7;">
                 We welcome inquiries from prospective trainees, collaborators, and colleagues across cardiovascular, renal, and neuroscience research.
               </p>
@@ -372,10 +451,16 @@
         })
       );
 
-      // Active nav link based on scroll position
-      const sections = ["focus", "research", "team", "contact"];
+      // Active nav link based on scroll
+      const sections = ["focus", "research", "team", "collaborate", "contact"];
       const navLinks = document.querySelectorAll(".nav-links a");
+      const siteHeader = document.querySelector(".site-header");
       window.addEventListener("scroll", () => {
+        // Toggle scrolled class so the header gets a translucent look
+        // only after the user has scrolled away from the top
+        if (siteHeader) {
+          siteHeader.classList.toggle("scrolled", window.scrollY > 8);
+        }
         let current = "focus";
         for (const id of sections) {
           const el = document.getElementById(id);
@@ -388,6 +473,80 @@
           a.classList.toggle("active", href === "#" + current);
         });
       });
+
+      // ============================================================
+      // Sympathetic nerve activity (SNA) waveform — pulse-synchronous
+      // bursts on a baseline of low-amplitude background neural noise.
+      // Emulates a real raw-rectified RSNA / MSNA recording.
+      // ============================================================
+      (function drawSNA() {
+        const W = 1400, H = 110;
+        const ZERO = 80;            // y-coordinate of the zero baseline
+        const NOISE_AMP = 4;        // background neural noise amplitude (px)
+        const BURST_INTERVAL = 95;  // px between bursts ≈ heart rate
+        const BURST_JITTER = 18;    // ± px random offset per burst
+        const STEP = 2;             // x sampling resolution (px)
+
+        // Deterministic pseudo-random so the waveform looks the same
+        // every reload (no flicker, no surprises)
+        let seed = 137;
+        const rand = () => {
+          seed = (seed * 9301 + 49297) % 233280;
+          return seed / 233280;
+        };
+
+        // ----- 1. Generate burst positions and individual amplitudes -----
+        const bursts = [];
+        for (let x = 60; x < W - 30; x += BURST_INTERVAL) {
+          const cx = x + (rand() - 0.5) * BURST_JITTER;
+          // Bursts vary 18 → 52 px tall (modest variability, like real SNA)
+          const amp = 18 + rand() * 34;
+          // Burst shape parameters — asymmetric envelope (fast rise, slower decay)
+          const riseW = 7 + rand() * 4;   // half-width of rising edge
+          const fallW = 14 + rand() * 6;  // half-width of falling edge
+          bursts.push({ cx, amp, riseW, fallW });
+        }
+
+        // ----- 2. Sample the rectified envelope across the trace -----
+        const env = []; // {x, y} samples
+        for (let x = 0; x <= W; x += STEP) {
+          // Background noise — small zero-mean jitter
+          let v = (rand() - 0.5) * NOISE_AMP * 2;
+
+          // Add contribution from each nearby burst (gaussian-like envelope)
+          for (const b of bursts) {
+            const dx = x - b.cx;
+            // Asymmetric envelope: rising side narrower, falling side wider
+            const w = dx < 0 ? b.riseW : b.fallW;
+            const k = dx / w;
+            const contrib = b.amp * Math.exp(-k * k);
+            v += contrib;
+          }
+
+          // Rectified — neural recordings are always shown above zero
+          if (v < 0) v = 0;
+          env.push({ x, y: ZERO - v });
+        }
+
+        // ----- 3. Build SVG paths -----
+        // Filled rectified-envelope path (the bursts)
+        let burstPath = `M 0 ${ZERO} `;
+        for (const p of env) burstPath += `L ${p.x} ${p.y.toFixed(2)} `;
+        burstPath += `L ${W} ${ZERO} Z`;
+
+        // Background "raw" trace (unrectified jitter, gold thread)
+        // — for visual texture only, sits behind the bursts
+        let basePath = "";
+        seed = 421; // re-seed for a different noise pattern
+        for (let x = 0; x <= W; x += STEP) {
+          const j = (rand() - 0.5) * NOISE_AMP * 1.6;
+          const y = ZERO + j;
+          basePath += (x === 0 ? "M " : "L ") + x + " " + y.toFixed(2) + " ";
+        }
+
+        document.getElementById("snaBursts").setAttribute("d", burstPath);
+        document.getElementById("snaBaseline").setAttribute("d", basePath);
+      })();
     </script>
   </body>
 </html>
