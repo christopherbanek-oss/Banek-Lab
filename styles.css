@@ -219,13 +219,14 @@ section + section { border-top: 1px solid var(--rule); }
   /* Natural sizing — let line-height do the work */
 }
 .brand .glyph {
-  width: 26px;
-  height: 26px;
+  /* Logo is a tall portrait kidney (~3:5 aspect). Set height; let width follow. */
+  height: 38px;
+  width: auto;
   flex-shrink: 0;
   display: block;
+  /* Slight visual lift so the kidney aligns with the wordmark cap-height */
+  margin-top: -2px;
 }
-.brand .glyph circle { fill: var(--maroon-2); }
-.brand .glyph path { stroke: var(--gold); stroke-width: 1.5; fill: none; }
 
 .brand .name {
   display: inline-flex;
@@ -453,7 +454,7 @@ section + section { border-top: 1px solid var(--rule); }
   color: var(--bone-3);
 }
 
-/* Sympathetic nerve waveform — see SVG paths in HTML */
+/* Real multi-unit nerve recording — image with CSS color treatment */
 .waveform {
   position: absolute;
   left: 0;
@@ -461,27 +462,22 @@ section + section { border-top: 1px solid var(--rule); }
   bottom: -1px;
   height: 110px;
   pointer-events: none;
-  opacity: 0.92;
+  overflow: hidden;
 }
-.waveform svg { width: 100%; height: 100%; display: block; }
-.waveform path.bursts {
-  fill: rgba(122, 0, 25, 0.18);
-  stroke: var(--maroon-2);
-  stroke-width: 1.1;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 0 6px rgba(163, 25, 51, 0.5));
-}
-.waveform path.baseline {
-  fill: none;
-  stroke: var(--gold);
-  stroke-width: 0.6;
-  stroke-linecap: round;
-  opacity: 0.45;
-}
-.waveform line.zero {
-  stroke: var(--rule-2);
-  stroke-width: 0.5;
-  stroke-dasharray: 2 4;
+.waveform-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* The PNG has white spikes on a transparent background.
+     Tint the white pixels to the maroon-2 color and add a soft gold glow,
+     so the recording stays in the site's palette. */
+  object-fit: cover;
+  object-position: center bottom;
+  filter:
+    brightness(0) saturate(100%)
+    invert(28%) sepia(94%) saturate(2600%) hue-rotate(335deg) brightness(95%) contrast(95%)
+    drop-shadow(0 0 4px rgba(163, 25, 51, 0.45));
+  opacity: 0.95;
 }
 
 /* =========================================================
