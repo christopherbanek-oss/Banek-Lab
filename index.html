@@ -58,10 +58,13 @@
             <span>Minneapolis, MN · 44.97° N</span>
           </div>
 
-          <h1>
-            <span class="line-1">The Banek</span>
-            <span class="line-2">Laboratory</span>
-          </h1>
+          <div class="hero-title">
+            <img class="hero-mark" src="images/Banek_Lab_Logo.png" alt="Banek Lab logo" />
+            <h1>
+              <span class="line-1">The Banek</span>
+              <span class="line-2">Laboratory</span>
+            </h1>
+          </div>
 
           <div class="hero-grid">
             <p class="hero-tagline">
@@ -78,9 +81,13 @@
           </div>
         </div>
 
-        <!-- Real multi-unit nerve recording from the Banek Lab -->
+        <!-- Sympathetic nerve burst recording — generated procedurally below -->
         <div class="waveform" aria-hidden="true">
-          <img class="waveform-img" src="images/Nerve_Recording.png" alt="" />
+          <svg id="snaWave" viewBox="0 0 1400 110" preserveAspectRatio="none">
+            <line class="zero" x1="0" y1="80" x2="1400" y2="80" />
+            <path class="baseline" id="snaBaseline" />
+            <path class="bursts" id="snaBursts" />
+          </svg>
         </div>
       </section>
 
@@ -162,7 +169,7 @@
       <section id="research">
         <div class="container">
           <div class="section-head">
-            <h2>Three lines of <em>inquiry.</em></h2>
+            <h2>Current lines of <em>research.</em></h2>
             <div class="meta">
               <span class="eyebrow"><span class="num">03</span> Research</span>
               <p style="color: var(--bone-2); font-size: 1.02rem; line-height: 1.7;">
@@ -490,6 +497,80 @@
           a.classList.toggle("active", href === "#" + current);
         });
       });
+
+      // ============================================================
+      // Sympathetic nerve activity (SNA) waveform — pulse-synchronous
+      // bursts on a baseline of low-amplitude background neural noise.
+      // Emulates a real raw-rectified RSNA / MSNA recording.
+      // ============================================================
+      (function drawSNA() {
+        const W = 1400, H = 110;
+        const ZERO = 80;            // y-coordinate of the zero baseline
+        const NOISE_AMP = 4;        // background neural noise amplitude (px)
+        const BURST_INTERVAL = 95;  // px between bursts ≈ heart rate
+        const BURST_JITTER = 18;    // ± px random offset per burst
+        const STEP = 2;             // x sampling resolution (px)
+
+        // Deterministic pseudo-random so the waveform looks the same
+        // every reload (no flicker, no surprises)
+        let seed = 137;
+        const rand = () => {
+          seed = (seed * 9301 + 49297) % 233280;
+          return seed / 233280;
+        };
+
+        // ----- 1. Generate burst positions and individual amplitudes -----
+        const bursts = [];
+        for (let x = 60; x < W - 30; x += BURST_INTERVAL) {
+          const cx = x + (rand() - 0.5) * BURST_JITTER;
+          // Bursts vary 18 → 52 px tall (modest variability, like real SNA)
+          const amp = 18 + rand() * 34;
+          // Burst shape parameters — asymmetric envelope (fast rise, slower decay)
+          const riseW = 7 + rand() * 4;   // half-width of rising edge
+          const fallW = 14 + rand() * 6;  // half-width of falling edge
+          bursts.push({ cx, amp, riseW, fallW });
+        }
+
+        // ----- 2. Sample the rectified envelope across the trace -----
+        const env = []; // {x, y} samples
+        for (let x = 0; x <= W; x += STEP) {
+          // Background noise — small zero-mean jitter
+          let v = (rand() - 0.5) * NOISE_AMP * 2;
+
+          // Add contribution from each nearby burst (gaussian-like envelope)
+          for (const b of bursts) {
+            const dx = x - b.cx;
+            // Asymmetric envelope: rising side narrower, falling side wider
+            const w = dx < 0 ? b.riseW : b.fallW;
+            const k = dx / w;
+            const contrib = b.amp * Math.exp(-k * k);
+            v += contrib;
+          }
+
+          // Rectified — neural recordings are always shown above zero
+          if (v < 0) v = 0;
+          env.push({ x, y: ZERO - v });
+        }
+
+        // ----- 3. Build SVG paths -----
+        // Filled rectified-envelope path (the bursts)
+        let burstPath = `M 0 ${ZERO} `;
+        for (const p of env) burstPath += `L ${p.x} ${p.y.toFixed(2)} `;
+        burstPath += `L ${W} ${ZERO} Z`;
+
+        // Background "raw" trace (unrectified jitter, gold thread)
+        // — for visual texture only, sits behind the bursts
+        let basePath = "";
+        seed = 421; // re-seed for a different noise pattern
+        for (let x = 0; x <= W; x += STEP) {
+          const j = (rand() - 0.5) * NOISE_AMP * 1.6;
+          const y = ZERO + j;
+          basePath += (x === 0 ? "M " : "L ") + x + " " + y.toFixed(2) + " ";
+        }
+
+        document.getElementById("snaBursts").setAttribute("d", burstPath);
+        document.getElementById("snaBaseline").setAttribute("d", basePath);
+      })();
     </script>
   </body>
 </html>

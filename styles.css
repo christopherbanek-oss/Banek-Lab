@@ -380,6 +380,36 @@ section + section { border-top: 1px solid var(--rule); }
   50% { opacity: 0.5; transform: scale(0.85); }
 }
 
+/* Hero title with featured logo — logo sits left of "The Banek Laboratory" */
+.hero-title {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.2rem, 3vw, 2.2rem);
+  margin: 0;
+}
+.hero-mark {
+  /* Match the visual height of the two-line h1 wordmark.
+     The h1 line-height is 0.88 and font-size scales with viewport,
+     so we scale the mark from the same clamp range. */
+  height: clamp(7rem, 22vw, 22rem);
+  width: auto;
+  flex-shrink: 0;
+  display: block;
+  /* Soft glow so the mark feels integrated with the page atmosphere */
+  filter: drop-shadow(0 8px 24px rgba(122, 0, 25, 0.35));
+}
+@media (max-width: 760px) {
+  /* On narrow viewports, stack mark above the wordmark and shrink the mark */
+  .hero-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+  .hero-mark {
+    height: clamp(8rem, 38vw, 14rem);
+  }
+}
+
 .hero h1 {
   font-size: clamp(3.2rem, 12vw, 12rem);
   font-style: normal;
@@ -395,7 +425,8 @@ section + section { border-top: 1px solid var(--rule); }
   display: block;
   font-style: italic;
   color: var(--gold);
-  margin-left: clamp(0rem, 8vw, 6rem);
+  /* Indent slightly less now that the mark anchors the left edge */
+  margin-left: clamp(0rem, 4vw, 3rem);
   letter-spacing: -0.03em;
 }
 
@@ -454,7 +485,7 @@ section + section { border-top: 1px solid var(--rule); }
   color: var(--bone-3);
 }
 
-/* Real multi-unit nerve recording — image with CSS color treatment */
+/* Sympathetic nerve waveform — see SVG paths in HTML, drawn by drawSNA() in JS */
 .waveform {
   position: absolute;
   left: 0;
@@ -462,22 +493,27 @@ section + section { border-top: 1px solid var(--rule); }
   bottom: -1px;
   height: 110px;
   pointer-events: none;
-  overflow: hidden;
+  opacity: 0.92;
 }
-.waveform-img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  /* The PNG has white spikes on a transparent background.
-     Tint the white pixels to the maroon-2 color and add a soft gold glow,
-     so the recording stays in the site's palette. */
-  object-fit: cover;
-  object-position: center bottom;
-  filter:
-    brightness(0) saturate(100%)
-    invert(28%) sepia(94%) saturate(2600%) hue-rotate(335deg) brightness(95%) contrast(95%)
-    drop-shadow(0 0 4px rgba(163, 25, 51, 0.45));
-  opacity: 0.95;
+.waveform svg { width: 100%; height: 100%; display: block; }
+.waveform path.bursts {
+  fill: rgba(122, 0, 25, 0.18);
+  stroke: var(--maroon-2);
+  stroke-width: 1.1;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(163, 25, 51, 0.5));
+}
+.waveform path.baseline {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 0.6;
+  stroke-linecap: round;
+  opacity: 0.45;
+}
+.waveform line.zero {
+  stroke: var(--rule-2);
+  stroke-width: 0.5;
+  stroke-dasharray: 2 4;
 }
 
 /* =========================================================
